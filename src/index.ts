@@ -2,12 +2,13 @@
  * @Description: In User Settings Edit
  * @Author: xukai
  * @Date: 2019-10-10 13:24:06
- * @LastEditTime: 2019-10-12 16:04:20
+ * @LastEditTime: 2019-10-15 11:28:34
  * @LastEditors: Please set LastEditors
  */
 
 import x from "./X";
 import "./style.css";
+// console.log(x.encrypt(1234567,2,3)); // 12**567
 // console.log(x.first([7, 2, 3, 5]));
 // console.log(x.last([7, 2, 3, 5]));
 // console.log(x.chunk([1,2,3,4,5,6,7,8,9,10,11],3));
@@ -23,4 +24,4 @@ import "./style.css";
 // console.log((x.indexOf([1, 2, 1, 2], 2,-1)))
 // console.log((x.initial([1, 2, 3])))
 // console.log((x.intersection([2, 1], [4, 2], [1, 2])))
-console.log((x.join(['a', 'b', 'c'], '~')))
+// console.log((x.join(['a', 'b', 'c'], '~')))

@@ -2,9 +2,10 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-10 17:47:48
- * @LastEditTime: 2019-10-12 16:05:02
+ * @LastEditTime: 2019-10-15 11:27:17
  * @LastEditors: Please set LastEditors
  */
+import encrypt from "./myutil/myutil"
 
 import first from "./xapi/first";
 import last from './xapi/last';
@@ -39,6 +40,7 @@ class X {
   initial:any = initial
   intersection:any = intersection
   join:any = join
+  encrypt:any = encrypt
 }
 let x = new X();
 
