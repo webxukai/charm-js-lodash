@@ -2,20 +2,64 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-16 13:58:56
- * @LastEditTime: 2019-10-16 15:11:13
+ * @LastEditTime: 2019-10-17 10:54:43
  * @LastEditors: Please set LastEditors
  */
 /**
- *
+ *如果 value 不是数组, 那么强制转为数组。
  * @param value 接收值
+ * @example x.castArray({ 'a': 1 }); => [{ 'a': 1 }]
  */
 export function castArray(value: any): any[] {
   let newArr: any = [];
+  if (isArray(value)) {
+    return value
+  }
+  newArr.push(value)
   return newArr;
 }
-export function clone(value: any): any[] {
-  let newArr: any = [];
-  return newArr;
+/**
+ * 浅克隆
+ * @param value 
+ */
+export function clone(value: any): any {
+  let newValue:any = {}
+  for (const prop in value) {
+    if (value.hasOwnProperty(prop)) {
+      newValue[prop] = value[prop];
+    }
+  }
+  return newValue;
+}
+/**
+ * 深克隆
+ * @param value 
+ */
+export function cloneDeep(value: any,newValue:any = {}): any {
+  for (const prop in value) {
+    if (value.hasOwnProperty(prop)) {
+      const element = value[prop];
+      if (element !== null && typeof element === 'object') {
+        if (isArray(element)) {
+          newValue[prop] = [];
+        }else {
+          newValue[prop] = {};
+        }
+        cloneDeep(element,newValue[prop]);
+      } else {
+        newValue[prop] = value[prop]
+      }
+    }
+  }
+  return newValue;
+}
+/**
+ * 比较两值是否相等
+ * @param value 
+ * @param other 
+ */
+export function eq(value:any, other:any):boolean {
+  return value === other || (value !== value && other !== other)
 }
 
 /**
@@ -23,7 +67,6 @@ export function clone(value: any): any[] {
  * @param value
  */
 export function isArguments(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
   if (Object.prototype.toString.call(value) == "[object Arguments]") {
     return true;
   }
@@ -34,8 +77,6 @@ export function isArguments(value: any): boolean {
  * @param value
  */
 export function isArray(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  console.log(value.length);
   if (Object.prototype.toString.call(value) == "[object Array]") {
     return true;
   }
@@ -46,7 +87,7 @@ export function isArray(value: any): boolean {
  * @param value
  */
 export function isArrayBuffer(value: any): boolean {
-  if (Object.prototype.toString.call(value) =="[object ArrayBuffer]") {
+  if (Object.prototype.toString.call(value) == "[object ArrayBuffer]") {
     return true;
   }
   return false;
@@ -56,19 +97,12 @@ export function isArrayBuffer(value: any): boolean {
  * @param value
  */
 export function isArrayLike(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (isFunction(value) === false && value.length && isInteger(value.length) && value.length >= 0) {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isArrayLikeObject(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (
+    isFunction(value) === false &&
+    value.length &&
+    isInteger(value.length) &&
+    value.length >= 0
+  ) {
     return true;
   }
   return false;
@@ -78,100 +112,23 @@ export function isArrayLikeObject(value: any): boolean {
  * @param value
  */
 export function isBoolean(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (Object.prototype.toString.call(value) == "[object Boolean]") {
     return true;
   }
   return false;
 }
-/**
- *
- * @param value
- */
-export function isBuffer(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
+
 /**
  *
  * @param value
  */
 export function isDate(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (Object.prototype.toString.call(value) == "[object Date]") {
     return true;
   }
   return false;
 }
-/**
- *
- * @param value
- */
-export function isElement(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isEmpty(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isEqual(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isEqualWith(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isError(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isFinite(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
+
 /**
  *检查 value 是否是 Function 对象。
  * @param value
@@ -196,75 +153,8 @@ export function isInteger(value: any): boolean {
  *
  * @param value
  */
-export function isLength(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
 export function isMap(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isMatch(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isMatchWith(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isNaN(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isNative(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isNil(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (Object.prototype.toString.call(value) == "[object Map]") {
     return true;
   }
   return false;
@@ -274,8 +164,7 @@ export function isNil(value: any): boolean {
  * @param value
  */
 export function isNull(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (value === null) {
     return true;
   }
   return false;
@@ -285,8 +174,7 @@ export function isNull(value: any): boolean {
  * @param value
  */
 export function isNumber(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (Object.prototype.toString.call(value) == "[object Number]") {
     return true;
   }
   return false;
@@ -296,8 +184,10 @@ export function isNumber(value: any): boolean {
  * @param value
  */
 export function isObject(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (
+    value != null &&
+    (typeof value === "object" || typeof value === "function")
+  ) {
     return true;
   }
   return false;
@@ -307,52 +197,18 @@ export function isObject(value: any): boolean {
  * @param value
  */
 export function isObjectLike(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (typeof value === "object" && value !== null) {
     return true;
   }
   return false;
 }
-/**
- *
- * @param value
- */
-export function isPlainObject(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isRegExp(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
-/**
- *
- * @param value
- */
-export function isSafeInteger(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
+
 /**
  *
  * @param value
  */
 export function isSet(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (Object.prototype.toString.call(value) == "[object Set]") {
     return true;
   }
   return false;
@@ -362,8 +218,7 @@ export function isSet(value: any): boolean {
  * @param value
  */
 export function isString(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (typeof value === "string") {
     return true;
   }
   return false;
@@ -373,30 +228,18 @@ export function isString(value: any): boolean {
  * @param value
  */
 export function isSymbol(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (typeof value === "symbol") {
     return true;
   }
   return false;
 }
-/**
- *
- * @param value
- */
-export function isTypedArray(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
-    return true;
-  }
-  return false;
-}
+
 /**
  *
  * @param value
  */
 export function isUndefined(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (value === undefined) {
     return true;
   }
   return false;
@@ -406,8 +249,7 @@ export function isUndefined(value: any): boolean {
  * @param value
  */
 export function isWeakMap(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (Object.prototype.toString.call(value) == "[object WeakMap]") {
     return true;
   }
   return false;
@@ -417,8 +259,7 @@ export function isWeakMap(value: any): boolean {
  * @param value
  */
 export function isWeakSet(value: any): boolean {
-  console.log(Object.prototype.toString.call(value));
-  if (Object.prototype.toString.call(value) == "[object Array]") {
+  if (Object.prototype.toString.call(value) == "[object WeakSet]") {
     return true;
   }
   return false;

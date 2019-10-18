@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: xukai
  * @Date: 2019-10-10 13:24:06
- * @LastEditTime: 2019-10-16 15:13:18
+ * @LastEditTime: 2019-10-17 13:39:29
  * @LastEditors: Please set LastEditors
  */
 
@@ -33,3 +33,9 @@ import "./style.css";
 // console.log(x.isArrayBuffer(document.body.children))
 // console.log(x.isFunction(function aa(){}))
 // console.log(x.isArray(new ArrayBuffer(2)))
+// console.log(x.castArray(1))
+// console.log(x.eq(12,12))
+// console.log(x.cloneDeep({ a: 1 ,b:[1,2,3],c:{a:'s',b:[3,4,5]}}));
+// console.log(x.ceil(12.345671223123123,6))
+// console.log(x.add([1,2,3,4,5]))
+// console.log(x.mean([1,2,3,4,5]))

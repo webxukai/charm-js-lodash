@@ -2,11 +2,14 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-10 17:47:48
- * @LastEditTime: 2019-10-16 15:12:50
+ * @LastEditTime: 2019-10-17 13:38:24
  * @LastEditors: Please set LastEditors
  */
 import encrypt from "./myutil/myutil";
 
+/**
+ * xapi数组包
+ */
 import first from "./xapi/first";
 import last from "./xapi/last";
 import chunk from "./xapi/chunk";
@@ -30,10 +33,41 @@ import pullAll from "./xapi/pullAll";
 /**
  * lang包工具
  */
-import { castArray, clone, isArray, isFunction, isArrayBuffer, isArrayLike } from "./lang/lang";
+import {
+  castArray,
+  clone,
+  isArray,
+  isFunction,
+  isArrayBuffer,
+  isArrayLike,
+  eq,
+  cloneDeep,
+  isArguments,
+  isBoolean,
+  isDate,
+  isInteger,
+  isMap,
+  isNull,
+  isNumber,
+  isObject,
+  isObjectLike,
+  isSet,
+  isString,
+  isSymbol,
+  isUndefined,
+  isWeakMap,
+  isWeakSet
+} from "./lang/lang";
+/**
+ * Math包
+ */
+import { ceil, round, floor, add, mean } from "./math/math";
 
 class X {
   constructor() {}
+  /**
+   * 数组
+   */
   first: any = first;
   last: any = last;
   chunk: any = chunk;
@@ -54,13 +88,40 @@ class X {
   nth: any = nth;
   pull: any = pull;
   pullAll: any = pullAll;
-
+  /**
+   * lang
+   */
   castArray: any = castArray;
   clone: any = clone;
+  cloneDeep: any = cloneDeep;
+  eq: any = eq;
+  isArguments: any = isArguments;
   isArray: any = isArray;
-  isFunction:any = isFunction
-  isArrayBuffer:any = isArrayBuffer
-  isArrayLike:any = isArrayLike
+  isBoolean: any = isBoolean;
+  isDate: any = isDate;
+  isFunction: any = isFunction;
+  isInteger: any = isInteger;
+  isMap: any = isMap;
+  isNull: any = isNull;
+  isNumber: any = isNumber;
+  isObject: any = isObject;
+  isObjectLike: any = isObjectLike;
+  isSet: any = isSet;
+  isString: any = isString;
+  isSymbol: any = isSymbol;
+  isUndefined: any = isUndefined;
+  isWeakMap: any = isWeakMap;
+  isWeakSet: any = isWeakSet;
+  isArrayBuffer: any = isArrayBuffer;
+  isArrayLike: any = isArrayLike;
+  /**
+   * Math包
+   */
+  ceil:any = ceil
+  round:any = round
+  floor:any = floor
+  add:any = add
+  mean:any = mean
 }
 let x = new X();
 
